@@ -35,6 +35,12 @@ def main():
                 log_event("player_hit")
                 print("Game over!")
                 sys.exit()
+        for asteroid in asteroids:
+            for shot_obj in shots:
+                if asteroid.collides_with(shot_obj):
+                    log_event("asteroid_shot")
+                    asteroid.split() # if some asteroids or shots are skipped when they should not be then the issue is likely in the loop
+                    shot_obj.kill()
         for item in drawable:
             item.draw(screen)
         pygame.display.flip()
